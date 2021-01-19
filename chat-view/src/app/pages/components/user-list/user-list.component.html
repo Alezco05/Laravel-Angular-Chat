@@ -1,0 +1,33 @@
+<a *ngFor="let user of userList"
+(click)="showModal(user)"
+  class="list-group-item list-group-item-action text-muted rounded-0">
+  <div class="media"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+    <div class="media-body ml-4">
+      <div class="d-flex align-items-center justify-content-between mb-1">
+        <h6 class="mb-0">{{user.name}}</h6><small class="small font-weight-bold">{{user.created_at | date: 'dd-MM-yyyy'}}</small>
+      </div>
+      <p class="font-italic mb-0 text-small">{{user.email}}</p>
+    </div>
+  </div>
+</a>
+
+<!-- Modal -->
+<div class="modal" [ngStyle]="{'display': showM ? 'block': 'none'}" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Mensaje para: {{userDM?.name}}</h5>
+        <button type="button" class="close" data-dismiss="modal" (click)="closeModal()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" [(ngModel)]="textMessage" (keyup.enter)="enviarMessage()" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="enviarMessage()">Enviar Mensaje</button>
+      </div>
+    </div>
+  </div>
+</div>
